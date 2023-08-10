@@ -45,9 +45,13 @@ public class MerchantStockController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateMerchantStock(@PathVariable Integer id, @RequestBody @Valid MerchantStock merchantStock) {
-        boolean isUpdated = merchantStockService.updateMerchantStock(id, merchantStock);
+    public ResponseEntity updateMerchantStock(@PathVariable Integer id, @RequestBody @Valid MerchantStock merchantStock, Errors errors) {
+        if (errors.hasErrors()){
+            String msg = errors.getFieldError().getDefaultMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
+        }
 
+        boolean isUpdated = merchantStockService.updateMerchantStock(id, merchantStock);
         if (isUpdated)
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Merchant Stock updated Successfully"));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Merchant Stock not exist!!"));
