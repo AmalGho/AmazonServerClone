@@ -56,4 +56,13 @@ public class MerchantController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Merchant not exist!!"));
     }
 
+
+    @PutMapping("/addStock/{productId}/{merchantId}/{amount}")
+    public ResponseEntity addStock(@PathVariable Integer productId, @PathVariable Integer merchantId, @PathVariable Integer amount) {
+        boolean isAdded = merchantService.addStock(productId, merchantId, amount);
+        if (isAdded)
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Additional Stock Amount Added Successfully"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Merchant stock not exist!!"));
+    }
+
 }

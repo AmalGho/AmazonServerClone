@@ -19,6 +19,6 @@ public class MerchantStock {
     private Integer merchantId;
 
     @NotNull(message = "stock should not be empty")
-    @Min(10)
+    @Min(value = 11, message = "stock must be greater than 10") //in start 11
     private Integer stock;
 }

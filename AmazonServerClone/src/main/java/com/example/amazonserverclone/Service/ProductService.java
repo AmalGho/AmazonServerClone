@@ -14,6 +14,14 @@ public class ProductService {
         return products;
     }
 
+    public Product getProductById(Integer id) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getId() == id)
+                return products.get(i);
+        }
+        return null;
+    }
+
     public void addProduct(Product product) {
         products.add(product);
     }
