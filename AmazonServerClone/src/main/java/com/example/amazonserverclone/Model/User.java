@@ -28,7 +28,7 @@ public class User {
     private String email;
 
     @NotEmpty(message = "role should not be empty")
-//    @Pattern(regexp = "")
+    @Pattern(regexp = "\\W*((?i)Admin|Customer(?-i))\\W*", message = "role should only be Admin or Customer")
     private String role;
 
     @NotNull(message = "balance should not be empty")
