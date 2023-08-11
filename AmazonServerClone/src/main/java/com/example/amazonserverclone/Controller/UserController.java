@@ -59,5 +59,13 @@ public class UserController {
     }
 
 
+    @GetMapping("/buy/{userId}/{productId}/{merchantId}")
+    public  ResponseEntity buyProduct(@PathVariable Integer userId, @PathVariable Integer productId, @PathVariable Integer merchantId) {
+        String msg = userService.buyProduct(userId, productId, merchantId);
+         return ResponseEntity.status(HttpStatus.OK).body(msg);
+
+    }
+
+
 
 }
