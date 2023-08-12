@@ -1,14 +1,18 @@
 package com.example.amazonserverclone.Service;
 
 import com.example.amazonserverclone.Model.MerchantStock;
+import com.example.amazonserverclone.Model.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
+@RequiredArgsConstructor
 public class MerchantStockService {
 
     ArrayList<MerchantStock> merchantStocks = new ArrayList<>();
+    private final ProductService productService;
 
     public ArrayList<MerchantStock> getAllMerchantStocks() {
         return merchantStocks;
@@ -36,6 +40,20 @@ public class MerchantStockService {
             }
         }
         return false;
+    }
+
+
+//    products quantity in stock
+    public String productQuantity(String productName) {
+        Integer counter = 0;
+        for (int i = 0; i < merchantStocks.size(); i++) {
+            Integer productId = merchantStocks.get(i).getProductId();
+            Product product = productService.getProductById(productId);
+            if ( product.getName().equalsIgnoreCase(productName)) {
+                counter++;
+            }
+        }
+        return "there are " + counter + " of the " + productName + " product";
     }
 
 }

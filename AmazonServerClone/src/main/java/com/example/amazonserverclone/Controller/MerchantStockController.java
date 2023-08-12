@@ -56,4 +56,11 @@ public class MerchantStockController {
             return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Merchant Stock updated Successfully"));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Merchant Stock not exist!!"));
     }
+
+
+    @GetMapping("/productQuantity/{productName}")
+    public ResponseEntity productQuantity(@PathVariable String productName) {
+        String msg = merchantStockService.productQuantity(productName);
+        return ResponseEntity.status(HttpStatus.OK).body(msg);
+    }
 }
