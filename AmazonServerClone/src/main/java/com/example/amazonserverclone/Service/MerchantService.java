@@ -54,7 +54,8 @@ public class MerchantService {
     public boolean addStock(Integer productId, Integer merchantId, Integer amount) {
 
         for (int i = 0; i < merchantStockService.merchantStocks.size(); i++) {
-            if (merchantStockService.merchantStocks.get(i).getProductId() == productId && merchantStockService.merchantStocks.get(i).getMerchantId() == merchantId) {
+            if (merchantStockService.merchantStocks.get(i).getProductId() == productId
+                    && merchantStockService.merchantStocks.get(i).getMerchantId() == merchantId) {
                 merchantStockService.merchantStocks.get(i).setStock(merchantStockService.merchantStocks.get(i).getStock() + amount);
                 return true;
             }
