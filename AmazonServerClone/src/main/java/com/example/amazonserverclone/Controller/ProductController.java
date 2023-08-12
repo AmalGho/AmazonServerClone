@@ -57,4 +57,13 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("Product not exist!!"));
     }
+
+
+    @GetMapping("/productOfCategory/{categoryName}")
+    public ResponseEntity getProductsByCategory(@PathVariable String categoryName) {
+        if (productService.getProductsByCategory(categoryName).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse("no products in this category"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByCategory(categoryName));
+    }
 }

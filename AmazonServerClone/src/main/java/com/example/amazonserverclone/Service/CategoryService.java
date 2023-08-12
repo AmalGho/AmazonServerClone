@@ -2,6 +2,7 @@ package com.example.amazonserverclone.Service;
 
 
 import com.example.amazonserverclone.Model.Category;
+import com.example.amazonserverclone.Model.Merchant;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +15,14 @@ public class CategoryService {
 
     public ArrayList<Category> getAllCategories() {
         return categories;
+    }
+
+    public Category getCategoryById(Integer id) {
+        for (int i = 0; i < categories.size(); i++) {
+            if (categories.get(i).getId() == id)
+                return categories.get(i);
+        }
+        return null;
     }
 
     public void addCategory(Category category) {
@@ -39,4 +48,5 @@ public class CategoryService {
         }
         return false;
     }
+
 }

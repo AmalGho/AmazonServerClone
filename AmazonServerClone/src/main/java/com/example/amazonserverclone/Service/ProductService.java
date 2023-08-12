@@ -1,14 +1,20 @@
 package com.example.amazonserverclone.Service;
 
+import com.example.amazonserverclone.Model.Category;
 import com.example.amazonserverclone.Model.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     ArrayList<Product> products = new ArrayList<>();
+    private final CategoryService categoryService;
+
 
     public ArrayList<Product> getAllProducts() {
         return products;
@@ -44,5 +50,21 @@ public class ProductService {
             }
         }
         return false;
+    }
+
+
+//    get all products of a specific category
+    public ArrayList<Product> getProductsByCategory(String categoryName) {
+        ArrayList<Product> productsOfCategory = new ArrayList<>();
+        Integer categoryId;
+        Category category;
+        for (int i = 0; i < products.size(); i++) {
+            categoryId = products.get(i).getCategoryID();
+            category = categoryService.getCategoryById(categoryId);
+            if (category.getName().equalsIgnoreCase(categoryName)) {
+                productsOfCategory.add(products.get(i));
+            }
+        }
+        return productsOfCategory;
     }
 }
