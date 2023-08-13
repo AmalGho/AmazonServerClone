@@ -61,9 +61,9 @@ public class ProductService {
         for (int i = 0; i < products.size(); i++) {
             categoryId = products.get(i).getCategoryID();
             category = categoryService.getCategoryById(categoryId);
-            if (category.getName().equalsIgnoreCase(categoryName)) {
+            if (category == null) return null;
+            if (category.getName().equalsIgnoreCase(categoryName))
                 productsOfCategory.add(products.get(i));
-            }
         }
         return productsOfCategory;
     }
